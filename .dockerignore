@@ -1,0 +1,30 @@
+# =============================================================================
+# Docker ignore — exclude non-essential files from build context
+# =============================================================================
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+.git/
+.gitignore
+.env
+.env.local
+.env.production
+*.md
+docs/
+tests/
+scripts/
+sample_pdfs/
+chroma_data/
+chromadb_data/
+uploads/
+temp_uploads/
+.pytest_cache/
+htmlcov/
+.coverage
+.vscode/
+.idea/
+*.log
+logs/
+docker/data/

@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: clustralai-rag
+    env: docker
+    region: oregon # Render default or you can change it
+    plan: free
+    dockerCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_LOG_LEVEL
+        value: INFO
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: APP_API_KEYS
+        sync: false
+      - key: CHROMA_PERSIST_DIR
+        value: ./chroma_data
+    
+    # Note on Storage:
+    # Render Free Tier does NOT support Persistent Disks.
+    # The 'chroma_data' folder will be stored ephemerally on the container's local disk.
+    # On every restart/deploy, the vector database will be cleared, requiring a re-ingestion of documents.
+    # Upgrade to the 'starter' plan to attach a persistent disk.

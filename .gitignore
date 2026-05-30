@@ -1,0 +1,63 @@
+# =============================================================================
+# Security-First RAG System — .gitignore
+# =============================================================================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# ---------- Virtual Environments ----------
+venv/
+.venv/
+env/
+ENV/
+
+# ---------- IDE ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------- Environment / Secrets ----------
+.env
+.env.local
+.env.production
+*.pem
+*.key
+
+# ---------- ChromaDB Persistent Data ----------
+chroma_data/
+chromadb_data/
+
+# ---------- Uploaded PDFs (local dev) ----------
+uploads/
+temp_uploads/
+
+# ---------- Sample PDFs (generated) ----------
+sample_pdfs/
+
+# ---------- Test artifacts ----------
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# ---------- Docker ----------
+docker/data/
+
+# ---------- OS ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Logs ----------
+*.log
+logs/
