@@ -57,7 +57,10 @@ ENV APP_ENV=production \
     APP_LOG_LEVEL=INFO \
     CHROMA_PERSIST_DIR=/app/chroma_data \
     PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
+    PYTHONDONTWRITEBYTECODE=1 \
+    MALLOC_ARENA_MAX=2 \
+    OMP_NUM_THREADS=1 \
+    TOKENIZERS_PARALLELISM=false
 
 # Expose port (default for local, overridden by Render)
 EXPOSE 8000

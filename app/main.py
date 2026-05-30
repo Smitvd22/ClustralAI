@@ -107,10 +107,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     api_keys = settings.get_api_keys_list()
     configure_api_keys(api_keys)
 
-    # Warm up the embedding model
-    logger.info("Loading embedding model (this may take a moment)...")
-    from rag.embeddings import warmup
-    warmup()
+    # (Skipping embedding model warmup to prevent memory spikes before port binding)
 
     # Initialize all services
     init_services(settings)
