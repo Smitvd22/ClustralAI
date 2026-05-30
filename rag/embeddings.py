@@ -30,7 +30,7 @@ MODEL_NAME: str = "all-MiniLM-L6-v2"
 EMBEDDING_DIMENSION: int = 384
 
 
-def get_model() -> SentenceTransformer:
+def get_model() -> Any:
     """
     Get or lazily load the sentence-transformer model.
 
