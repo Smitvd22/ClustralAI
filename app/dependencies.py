@@ -43,7 +43,7 @@ def init_services(settings: Settings) -> None:
         persist_dir=settings.chroma_persist_dir,
         collection_name=settings.chroma_collection_name,
     )
-    _vector_store.initialize()
+    # (Vector store initialized lazily on first access to prevent blocking Uvicorn startup)
 
     # Initialize LLM client
     _llm_client = LLMClient(
@@ -77,6 +77,8 @@ def get_vector_store() -> VectorStore:
     """Get the initialized vector store."""
     if _vector_store is None:
         raise RuntimeError("VectorStore not initialized")
+    if getattr(_vector_store, "_collection", None) is None:
+        _vector_store.initialize()
     return _vector_store
 
 

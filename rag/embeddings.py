@@ -17,16 +17,14 @@ SECURITY: The model runs locally — no data is sent to external services
 for embedding generation.
 """
 import logging
-from typing import Optional
-
-from sentence_transformers import SentenceTransformer
+from typing import Optional, Any
 
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # Singleton model instance
 # ---------------------------------------------------------------------------
-_model: Optional[SentenceTransformer] = None
+_model: Optional[Any] = None
 
 MODEL_NAME: str = "all-MiniLM-L6-v2"
 EMBEDDING_DIMENSION: int = 384
@@ -45,6 +43,7 @@ def get_model() -> SentenceTransformer:
     """
     global _model
     if _model is None:
+        from sentence_transformers import SentenceTransformer
         logger.info("Loading embedding model: %s", MODEL_NAME)
         _model = SentenceTransformer(MODEL_NAME)
         logger.info("Embedding model loaded successfully | dim=%d", EMBEDDING_DIMENSION)

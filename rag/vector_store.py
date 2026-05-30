@@ -14,8 +14,6 @@ Azure File Share encryption.
 import logging
 from typing import Any, Optional
 
-import chromadb
-
 logger = logging.getLogger(__name__)
 
 
@@ -35,8 +33,8 @@ class VectorStore:
     ) -> None:
         self._persist_dir = persist_dir
         self._collection_name = collection_name
-        self._client: Optional[chromadb.ClientAPI] = None
-        self._collection: Optional[chromadb.Collection] = None
+        self._client: Optional[Any] = None
+        self._collection: Optional[Any] = None
 
     def initialize(self) -> None:
         """
@@ -49,6 +47,7 @@ class VectorStore:
             self._persist_dir,
             self._collection_name,
         )
+        import chromadb
         self._client = chromadb.PersistentClient(path=self._persist_dir)
         self._collection = self._client.get_or_create_collection(
             name=self._collection_name,
@@ -60,7 +59,7 @@ class VectorStore:
         )
 
     @property
-    def collection(self) -> chromadb.Collection:
+    def collection(self) -> Any:
         """Get the active collection, raising if not initialized."""
         if self._collection is None:
             raise RuntimeError("VectorStore not initialized. Call initialize() first.")
