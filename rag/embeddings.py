@@ -64,7 +64,8 @@ def embed_texts(texts: list[str]) -> list[list[float]]:
         return []
 
     model = get_model()
-    embeddings = model.encode(texts, show_progress_bar=False, convert_to_numpy=True)
+    # SECURITY/PERFORMANCE: Set batch_size=1 to prevent OOM on Render Free Tier
+    embeddings = model.encode(texts, batch_size=1, show_progress_bar=False, convert_to_numpy=True)
 
     # Convert numpy arrays to plain lists for JSON serialization / ChromaDB
     result = [emb.tolist() for emb in embeddings]
