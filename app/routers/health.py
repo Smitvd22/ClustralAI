@@ -49,14 +49,12 @@ async def health_check(
     """
     components: list[ComponentHealth] = []
 
-    # Embedding model
+    # Embedding model (do not eagerly load to prevent OOM on health check)
     try:
-        from rag.embeddings import get_model
-        model = get_model()
         components.append(ComponentHealth(
             name="embedding_model",
             status="healthy",
-            details="all-MiniLM-L6-v2 loaded",
+            details="all-MiniLM-L6-v2 configured (lazy loaded)",
         ))
     except Exception as exc:
         components.append(ComponentHealth(

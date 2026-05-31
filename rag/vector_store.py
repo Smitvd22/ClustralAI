@@ -60,9 +60,9 @@ class VectorStore:
 
     @property
     def collection(self) -> Any:
-        """Get the active collection, raising if not initialized."""
+        """Get the active collection, initializing lazily if needed."""
         if self._collection is None:
-            raise RuntimeError("VectorStore not initialized. Call initialize() first.")
+            self.initialize()
         return self._collection
 
     def add_documents(
